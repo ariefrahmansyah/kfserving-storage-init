@@ -1,0 +1,14 @@
+name: ci
+on: push
+jobs:
+  publish-merlin-docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_TOKEN }}
+          registry: ghcr.io
+          tag_with_ref: true
